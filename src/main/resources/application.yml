@@ -4,10 +4,14 @@ spring:
     url: r2dbc:h2:mem:///fluxchat
     username: sa
     password:
+  flyway:
+    enabled: true
+    url: jdbc:h2:mem:fluxchat;DB_CLOSE_DELAY=-1
+    user: sa
+    password:
   sql:
     init:
-      mode: always
-
+      mode: never  # schema.sql 비활성화
   # MongoDB
   mongodb:
     uri: mongodb://localhost:27017/fluxchat
