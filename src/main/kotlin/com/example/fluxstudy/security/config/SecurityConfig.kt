@@ -20,11 +20,11 @@ class SecurityConfig (
     private val accessDeniedHandler: AccessDeniedHandler,
 ){
     @Bean
-    fun filterChain(http: ServerHttpSecurity, jwtAuthenticationFilter: JwtAuthenticationFilter): SecurityWebFilterChain =
+    fun filterChain(http: ServerHttpSecurity): SecurityWebFilterChain =
         http
             .authorizeExchange { auth ->
                 auth
-                    .pathMatchers("/auth/**").permitAll()
+                    .pathMatchers("/api/v1/auth/**").permitAll()
                     .anyExchange().authenticated()
             }
             .addFilterBefore(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)

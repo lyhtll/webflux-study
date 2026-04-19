@@ -26,10 +26,12 @@ dependencies {
     // Security
     implementation("org.springframework.boot:spring-boot-starter-security")
 
-    // R2DBC + H2
+    // R2DBC
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    runtimeOnly("io.r2dbc:r2dbc-h2")
+
+    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("org.postgresql:r2dbc-postgresql")
 
     // MongoDB
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
@@ -54,12 +56,17 @@ dependencies {
 
     // Flyway
     implementation("org.springframework.boot:spring-boot-starter-flyway")
+    implementation("org.flywaydb:flyway-database-postgresql:11.8.0")
 }
 
 kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
     }
+}
+
+configurations.all {
+    exclude(group = "org.gradle", module = "gradle-logging")
 }
 
 tasks.withType<Test> {

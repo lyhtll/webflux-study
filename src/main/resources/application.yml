@@ -1,22 +1,20 @@
 spring:
-  # H2 (R2DBC)
   r2dbc:
-    url: r2dbc:h2:mem:///fluxchat
-    username: sa
-    password:
+    url: r2dbc:postgresql://localhost:5432/fluxchat
+    username: fluxchat
+    password: fluxchat
   flyway:
     enabled: true
-    url: jdbc:h2:mem:fluxchat;DB_CLOSE_DELAY=-1
-    user: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/fluxchat
+    user: fluxchat
+    password: fluxchat
+    locations: classpath:db/migration
+    schemas: public
   sql:
     init:
-      mode: never  # schema.sql 비활성화
-  # MongoDB
+      mode: never
   mongodb:
     uri: mongodb://localhost:27017/fluxchat
-
-    # Redis
   data:
     redis:
       host: localhost
